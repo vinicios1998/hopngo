@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Box, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, SelectChangeEvent, SxProps, TextField, Theme, Typography } from '@mui/material';
-import { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Container, SxProps, Theme, Typography } from '@mui/material';
 import HistoryIcon from '@mui/icons-material/History';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

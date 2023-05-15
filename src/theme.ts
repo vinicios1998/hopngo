@@ -8,7 +8,7 @@ export const themeOptions: ThemeOptions = createTheme({
             main: '#F1C40F'
         },
         secondary: {
-            main: grey[500],
+            main: '#689f38',
         },
     },
 });

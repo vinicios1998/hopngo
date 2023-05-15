@@ -14,10 +14,10 @@ export default function NavigationButton({ icon, label, isActive }: INavigationB
             flexDirection: 'column',
             alignItems: 'center',
             width: '4rem',
-            color: isActive ? 'primary.main' : 'text.secondary',
+            color: isActive ? 'text.primary' : 'text.secondary',
         }}>
             {icon}
-            {label && <Typography fontWeight={isActive ? 'normal' : 'bold'} fontSize={12} > {label}</Typography>}
+            {label && <Typography fontWeight={isActive ? 'bold' : 'normal'} fontSize={11} > {label}</Typography>}
         </Box>
 
     );
