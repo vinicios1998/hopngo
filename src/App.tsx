@@ -12,10 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/navigationList/:origin/:destination" element={<NavigationList />} />
-
-          {/* <NavigationList /> */}
-          {/* <ReviewTrip /> */}
+          <Route path="/from/:from/to/:to" element={<NavigationList />} />
+          <Route path="/from/:from/to/:to/trip/:idTrip" element={<ReviewTrip />} />
         </Routes>
       </BrowserRouter>
     </LocalizationProvider>

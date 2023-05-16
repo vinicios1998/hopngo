@@ -11,7 +11,6 @@ export default function DestinationSearchCard() {
     const [age, setAge] = useState(1);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(parseInt(event.target.value));
     };
     return (
 
