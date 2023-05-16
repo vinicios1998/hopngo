@@ -1,0 +1,326 @@
+[
+  {
+    "label": "Lisbon",
+    "country": "Portugal",
+    "lat": "38.7253",
+    "lng": "-9.1500"
+  },
+  {
+    "label": "Porto",
+    "country": "Portugal",
+    "lat": "41.1621",
+    "lng": "-8.6220"
+  },
+  {
+    "label": "Aves",
+    "country": "Portugal",
+    "lat": "41.4400",
+    "lng": "-8.3000"
+  },
+  {
+    "label": "Sintra",
+    "country": "Portugal",
+    "lat": "38.7992",
+    "lng": "-9.3883"
+  },
+  {
+    "label": "Vila Nova de Gaia",
+    "country": "Portugal",
+    "lat": "41.1333",
+    "lng": "-8.6167"
+  },
+  {
+    "label": "Cascais",
+    "country": "Portugal",
+    "lat": "38.7000",
+    "lng": "-9.4167"
+  },
+  {
+    "label": "Loures",
+    "country": "Portugal",
+    "lat": "38.8333",
+    "lng": "-9.1667"
+  },
+  {
+    "label": "Braga",
+    "country": "Portugal",
+    "lat": "41.5503",
+    "lng": "-8.4200"
+  },
+  {
+    "label": "Almada",
+    "country": "Portugal",
+    "lat": "38.6803",
+    "lng": "-9.1583"
+  },
+  {
+    "label": "Matosinhos",
+    "country": "Portugal",
+    "lat": "41.1833",
+    "lng": "-8.7000"
+  },
+  {
+    "label": "Amadora",
+    "country": "Portugal",
+    "lat": "38.7333",
+    "lng": "-9.2333"
+  },
+  {
+    "label": "Oeiras",
+    "country": "Portugal",
+    "lat": "38.6833",
+    "lng": "-9.3167"
+  },
+  {
+    "label": "Gondomar",
+    "country": "Portugal",
+    "lat": "41.1500",
+    "lng": "-8.5333"
+  },
+  {
+    "label": "Seixal",
+    "country": "Portugal",
+    "lat": "38.6500",
+    "lng": "-9.1000"
+  },
+  {
+    "label": "Guimarães",
+    "country": "Portugal",
+    "lat": "41.4500",
+    "lng": "-8.3000"
+  },
+  {
+    "label": "Odivelas",
+    "country": "Portugal",
+    "lat": "38.7903",
+    "lng": "-9.1797"
+  },
+  {
+    "label": "Coimbra",
+    "country": "Portugal",
+    "lat": "40.2111",
+    "lng": "-8.4292"
+  },
+  {
+    "label": "Vila Franca de Xira",
+    "country": "Portugal",
+    "lat": "38.9500",
+    "lng": "-8.9833"
+  },
+  {
+    "label": "Maia",
+    "country": "Portugal",
+    "lat": "41.2333",
+    "lng": "-8.6167"
+  },
+  {
+    "label": "Famalicão",
+    "country": "Portugal",
+    "lat": "41.4167",
+    "lng": "-8.5167"
+  },
+  {
+    "label": "Leiria",
+    "country": "Portugal",
+    "lat": "39.7500",
+    "lng": "-8.8000"
+  },
+  {
+    "label": "Setúbal",
+    "country": "Portugal",
+    "lat": "38.5243",
+    "lng": "-8.8926"
+  },
+  {
+    "label": "Barcelos",
+    "country": "Portugal",
+    "lat": "41.5167",
+    "lng": "-8.6167"
+  },
+  {
+    "label": "Funchal",
+    "country": "Portugal",
+    "lat": "32.6500",
+    "lng": "-16.9167"
+  },
+  {
+    "label": "Viseu",
+    "country": "Portugal",
+    "lat": "40.6667",
+    "lng": "-7.9167"
+  },
+  {
+    "label": "Viana do Castelo",
+    "country": "Portugal",
+    "lat": "41.7000",
+    "lng": "-8.8333"
+  },
+  {
+    "label": "Barreiro",
+    "country": "Portugal",
+    "lat": "38.6667",
+    "lng": "-9.0667"
+  },
+  {
+    "label": "Aveiro",
+    "country": "Portugal",
+    "lat": "40.6333",
+    "lng": "-8.6500"
+  },
+  {
+    "label": "Queluz",
+    "country": "Portugal",
+    "lat": "38.7514",
+    "lng": "-9.2664"
+  },
+  {
+    "label": "Ponta Delgada",
+    "country": "Portugal",
+    "lat": "37.7400",
+    "lng": "-25.6700"
+  },
+  {
+    "label": "Faro",
+    "country": "Portugal",
+    "lat": "37.0161",
+    "lng": "-7.9350"
+  },
+  {
+    "label": "Santarém",
+    "country": "Portugal",
+    "lat": "39.2339",
+    "lng": "-8.6861"
+  },
+  {
+    "label": "Évora",
+    "country": "Portugal",
+    "lat": "38.5667",
+    "lng": "-7.9000"
+  },
+  {
+    "label": "Castelo Branco",
+    "country": "Portugal",
+    "lat": "39.8167",
+    "lng": "-7.5000"
+  },
+  {
+    "label": "Vila Real",
+    "country": "Portugal",
+    "lat": "41.2958",
+    "lng": "-7.7461"
+  },
+  {
+    "label": "Rio Tinto",
+    "country": "Portugal",
+    "lat": "41.1780",
+    "lng": "-8.5600"
+  },
+  {
+    "label": "Amora",
+    "country": "Portugal",
+    "lat": "38.6265",
+    "lng": "-9.1189"
+  },
+  {
+    "label": "Corroios",
+    "country": "Portugal",
+    "lat": "38.6147",
+    "lng": "-9.1508"
+  },
+  {
+    "label": "Guarda",
+    "country": "Portugal",
+    "lat": "40.5333",
+    "lng": "-7.3333"
+  },
+  {
+    "label": "Mafamude",
+    "country": "Portugal",
+    "lat": "41.1152",
+    "lng": "-8.6036"
+  },
+  {
+    "label": "Ermezinde",
+    "country": "Portugal",
+    "lat": "41.2170",
+    "lng": "-8.5500"
+  },
+  {
+    "label": "Beja",
+    "country": "Portugal",
+    "lat": "38.0333",
+    "lng": "-7.8833"
+  },
+  {
+    "label": "Agualva",
+    "country": "Portugal",
+    "lat": "38.7700",
+    "lng": "-9.2988"
+  },
+  {
+    "label": "Bragança",
+    "country": "Portugal",
+    "lat": "41.8067",
+    "lng": "-6.7589"
+  },
+  {
+    "label": "Espinho",
+    "country": "Portugal",
+    "lat": "41.0100",
+    "lng": "-8.6400"
+  },
+  {
+    "label": "Póvoa de Santa Iria",
+    "country": "Portugal",
+    "lat": "38.8620",
+    "lng": "-9.0690"
+  },
+  {
+    "label": "Senhora da Hora",
+    "country": "Portugal",
+    "lat": "41.1860",
+    "lng": "-8.6510"
+  },
+  {
+    "label": "Massamá",
+    "country": "Portugal",
+    "lat": "38.7568",
+    "lng": "-9.2748"
+  },
+  {
+    "label": "Águas Santas",
+    "country": "Portugal",
+    "lat": "41.2090",
+    "lng": "-8.5890"
+  },
+  {
+    "label": "Estoril",
+    "country": "Portugal",
+    "lat": "38.7042",
+    "lng": "-9.3983"
+  },
+  {
+    "label": "Portalegre",
+    "country": "Portugal",
+    "lat": "39.3167",
+    "lng": "-7.4167"
+  },
+  {
+    "label": "São João da Madeira",
+    "country": "Portugal",
+    "lat": "40.8972",
+    "lng": "-8.4889"
+  },
+  {
+    "label": "Entroncamento",
+    "country": "Portugal",
+    "lat": "39.4653",
+    "lng": "-8.4681"
+  },
+  {
+    "label": "Feira",
+    "country": "Portugal",
+    "lat": "40.9254",
+    "lng": "-8.5428"
+  }
+]

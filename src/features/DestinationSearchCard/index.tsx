@@ -46,9 +46,9 @@ export default function DestinationSearchCard() {
                 label="Seats"
                 onChange={handleChange}
             >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
+                {[...Array(5 + 1).keys()].slice(1).map(x => (
+                    <MenuItem value={x}>{x}</MenuItem>
+                ))}
             </Select>
             <Button sx={{
                 gridArea: 'search-button',

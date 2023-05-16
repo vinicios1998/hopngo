@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { Box, Button, Container, SelectChangeEvent } from '@mui/material';
+import { Box, Button, Container, SelectChangeEvent, Typography } from '@mui/material';
 import { useState } from 'react';
 import NavigationCard from '../../components/navigationCard';
 import NaviagationListHeader from '../../components/naviationListHeader';
 
-export default function NavigationList() {
+export default function ReviewTrip() {
     return (
         <Container sx={{ padding: '0' }}>
-            <NaviagationListHeader />
             <Container sx={{ marginTop: '4rem' }}>
                 <NavigationCard />
-                <NavigationCard />
-                <NavigationCard />
-                <NavigationCard />
+            </Container>
+            <Container sx={{ marginTop: '4rem' }}>
+                <Typography>Preço total</Typography>
+                <Typography>10€</Typography>
+            </Container>
+            <Container sx={{ marginTop: '4rem' }}>
+                <Typography>Preço total</Typography>
+                <Typography>10€</Typography>
             </Container>
             <Box
                 sx={{

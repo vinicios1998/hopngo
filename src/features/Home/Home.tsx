@@ -1,22 +1,12 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import { Button, Container, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
-import { useState } from 'react';
-import { DatePicker } from '@mui/x-date-pickers';
-import { ReactComponent as Logo } from '../assets/logo.svg'
-import SearchBox from '../components/searchBox';
-import DestinationSearchCard from '../features/DestinationSearchCard';
-import HistoryCard from '../components/historyCard';
-import SearchHistory from '../features/SearchHistory';
-import NavigationMenu from '../features/NavigationMenu';
+import { Container, Typography } from '@mui/material';
+import { ReactComponent as Logo } from '../../assets/logo.svg'
+import DestinationSearchCard from '../DestinationSearchCard';
+import SearchHistory from '../SearchHistory';
+import NavigationMenu from '../NavigationMenu';
 
 export default function BoxSx() {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
-    const [age, setAge] = useState(1);
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(parseInt(event.target.value));
-    };
     return (
         <Container sx={{ padding: '0' }}>
             <Container

@@ -5,10 +5,10 @@ export const themeOptions: ThemeOptions = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#F1C40F'
+            main: '#fbc02d'
         },
         secondary: {
-            main: '#689f38',
+            main: '#00b0ff',
         },
     },
 });

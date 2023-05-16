@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, SelectChangeEvent, SxProps, TextField, Theme } from '@mui/material';
-import { useState } from 'react';
+import { Autocomplete, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import cities from '../../mock/cities.json'
 
 interface ISearchBoxProps {
     label: string
@@ -9,23 +9,35 @@ interface ISearchBoxProps {
 }
 
 export default function SearchBox({ label, sx }: ISearchBoxProps) {
+
+
     return (
-        <FormControl size='small' sx={sx} fullWidth margin='none' variant="outlined">
-            <InputLabel variant='outlined'>{label}</InputLabel>
-            <OutlinedInput
-                id="outlined-adornment-password"
-                type={'text'}
-                endAdornment={
-                    <InputAdornment position="start">
-                        <IconButton
-                            edge="start"
-                        >
+        <Autocomplete
+            disablePortal
+            fullWidth
+            options={cities}
+            getOptionLabel={(option) => option.label}
+            placeholder={label}
+            size='medium'
+            sx={sx}
+            renderInput={(params) => {
+                params.InputProps.endAdornment = (
+                    <InputAdornment position="end">
+                        <IconButton edge="end">
                             <SearchIcon />
                         </IconButton>
                     </InputAdornment>
-                }
-                label="search"
-            />
-        </FormControl>
+                )
+                return (
+                    <TextField
+                        variant='outlined'
+                        label={label}
+                        placeholder={label}
+                        {...params}
+                        fullWidth
+                    />
+                )
+            }}
+        />
     );
 }
