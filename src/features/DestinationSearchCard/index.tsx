@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { ReactComponent as Logo } from '../assets/logo.svg'
 import SearchBox from '../../components/searchBox';
-import { CityInfo } from '../../types/types';
+import { CityInfo, TripSearchParams } from '../../types/types';
 import { fetchCities } from '../../service/service';
 import { Dayjs } from 'dayjs';
 import { useNavigate } from 'react-router-dom';
@@ -37,6 +37,22 @@ export default function DestinationSearchCard() {
     };
 
     const handleSearch = () => {
+        if (!fromLocation || !toLocation || !startDate) return
+
+
+        const historyEntry: TripSearchParams = {
+            from: fromLocation.label,
+            to: toLocation.label,
+            date: startDate.format('DD-MM-YYYY'),
+            seats: seatCount
+        }
+        let history = [] as TripSearchParams[]
+        const historyJson = localStorage.getItem('search-history')
+        if (historyJson) {
+            history = JSON.parse(historyJson) as TripSearchParams[]
+        }
+        history.unshift(historyEntry)
+        localStorage.setItem('search-history', JSON.stringify(history))
         navigate(`/from/${fromLocation?.label}/to/${toLocation?.label}/date/${startDate?.format('DD-MM-YYYY')}`)
     }
     useEffect(() => {

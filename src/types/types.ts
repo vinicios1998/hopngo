@@ -15,6 +15,13 @@ interface User {
     bio: string;
 }
 
+export interface TripSearchParams {
+    from: string,
+    to: string,
+    date: string,
+    seats: number
+}
+
 export interface TripInfo {
     user: User,
     from: CityInfo,
