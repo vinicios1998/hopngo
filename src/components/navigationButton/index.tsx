@@ -17,7 +17,7 @@ export default function NavigationButton({ icon, label, isActive }: INavigationB
             color: isActive ? 'text.primary' : 'text.secondary',
         }}>
             {icon}
-            {label && <Typography fontWeight={isActive ? 'bold' : 'normal'} fontSize={11} > {label}</Typography>}
+            {label && <Typography fontWeight={isActive ? 'bold' : 'normal'} fontSize={'1rem'} > {label}</Typography>}
         </Box>
 
     );

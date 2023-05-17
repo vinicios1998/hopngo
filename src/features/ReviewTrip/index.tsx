@@ -7,8 +7,8 @@ import NaviagationListHeader from '../../components/naviationListHeader';
 export default function ReviewTrip() {
     return (
         <Container sx={{ padding: '0' }}>
-            {/* <Container sx={{ marginTop: '4rem' }}>
-                <NavigationCard />
+            <Container sx={{ marginTop: '4rem' }}>
+                <NavigationCard tripInfo={undefined} />
             </Container>
             <Container sx={{ marginTop: '4rem' }}>
                 <Typography>Preço total</Typography>
@@ -47,7 +47,7 @@ export default function ReviewTrip() {
                     variant="contained">
                     Filter
                 </Button>
-            </Box> */}
+            </Box>
         </Container>
     );
 }

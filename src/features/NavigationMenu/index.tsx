@@ -13,10 +13,15 @@ export default function NavigationMenu() {
             sx={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'space-evenly',
                 position: 'fixed',
                 bottom: 0,
-                backgroundColor: 'primary.light'
+                backgroundColor: 'primary.light',
+                borderRadius: '2rem 2rem 0 0',
+                padding: {
+                    xs: '0.5rem',
+                    lg: '1rem'
+                }
             }}>
             <NavigationButton icon={<SearchIcon />} label={'Search'} isActive />
             <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'} />

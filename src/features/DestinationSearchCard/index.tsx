@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Button, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
+import { Button, Container, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { ReactComponent as Logo } from '../assets/logo.svg'
@@ -66,9 +66,8 @@ export default function DestinationSearchCard() {
 
     if (!cities) return null
     return (
-        <Box
+        <Container
             sx={{
-                height: '12rem',
                 backgroundColor: 'background.paper',
                 alignContent: 'center',
                 justifyContent: 'center',
@@ -131,6 +130,6 @@ export default function DestinationSearchCard() {
             >
                 Pesquisar
             </Button>
-        </Box >
+        </Container >
     );
 }
