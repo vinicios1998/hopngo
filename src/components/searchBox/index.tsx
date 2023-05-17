@@ -1,15 +1,20 @@
 import * as React from 'react';
-import { Autocomplete, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme } from '@mui/material';
+import { Autocomplete, IconButton, InputAdornment, SxProps, TextField, Theme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import cities from '../../mock/cities.json'
+import { CityInfo } from '../../types/types';
 
 interface ISearchBoxProps {
     label: string
     sx?: SxProps<Theme> | undefined
+    updateLocation: (location: CityInfo | null) => void
+    cities: CityInfo[]
+
 }
 
-export default function SearchBox({ label, sx }: ISearchBoxProps) {
-
+export default function SearchBox({ label, sx, updateLocation, cities }: ISearchBoxProps) {
+    const onChange = (event: React.SyntheticEvent, value: CityInfo | null) => {
+        updateLocation(value);
+    }
 
     return (
         <Autocomplete
@@ -20,6 +25,7 @@ export default function SearchBox({ label, sx }: ISearchBoxProps) {
             placeholder={label}
             size='medium'
             sx={sx}
+            onChange={(e, v) => onChange(e, v)}
             renderInput={(params) => {
                 params.InputProps.endAdornment = (
                     <InputAdornment position="end">

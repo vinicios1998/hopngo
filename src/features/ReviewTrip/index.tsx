@@ -7,7 +7,7 @@ import NaviagationListHeader from '../../components/naviationListHeader';
 export default function ReviewTrip() {
     return (
         <Container sx={{ padding: '0' }}>
-            <Container sx={{ marginTop: '4rem' }}>
+            {/* <Container sx={{ marginTop: '4rem' }}>
                 <NavigationCard />
             </Container>
             <Container sx={{ marginTop: '4rem' }}>
@@ -23,25 +23,31 @@ export default function ReviewTrip() {
                     position: 'fixed',
                     display: 'flex',
                     width: '100%',
-                    justifyContent: 'space-around',
-                    bottom: '1rem'
+                    justifyContent: 'center',
+                    bottom: '1rem',
+                    left: 0
                 }} >
                 <Button
                     color='secondary'
-                    size='large'
                     sx={{
                         fontWeight: 700,
                         fontSize: '1rem',
                         color: 'primary.contrastText',
-                    }} variant="contained">Track trips
+                    }}
+                    size='large'
+                    variant="contained">
+                    Track trips
                 </Button>
                 <Button sx={{
                     fontWeight: 700,
                     fontSize: '1rem',
                     color: 'primary.contrastText',
-                }} variant="contained">Filter
+                }}
+                    size='large'
+                    variant="contained">
+                    Filter
                 </Button>
-            </Box>
+            </Box> */}
         </Container>
     );
 }

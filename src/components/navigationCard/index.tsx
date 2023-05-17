@@ -4,12 +4,11 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessibleIcon from '@mui/icons-material/Accessible';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import { TripInfo } from '../../types/types';
 
 
 interface INavigationCardProps {
-    icon?: JSX.Element | null
-    label?: string | null
-    isActive?: boolean
+    tripInfo: TripInfo
 }
 
 const CardSegmentContainer = styled(Box)({
@@ -41,7 +40,7 @@ const BottomCardContainer = styled(Box)({
     justifyContent: 'center',
     flexGrow: 1
 });
-export default function NavigationCard({ icon, label, isActive }: INavigationCardProps) {
+export default function NavigationCard({ tripInfo }: INavigationCardProps) {
     return (
 
         <Container sx={{ padding: '0.5rem 0' }} id="navigation-card-container">
@@ -49,8 +48,8 @@ export default function NavigationCard({ icon, label, isActive }: INavigationCar
                 <RowFlexContainer>
                     <RowFlexContainer>
                         <CardSegmentContainer >
-                            <Typography>10:00</Typography>
-                            <Typography>13:00</Typography>
+                            <Typography>{tripInfo.date.format('HH:mm')}</Typography>
+                            <Typography>{tripInfo.date.add(tripInfo.duration, 'hour').format('HH:mm')}</Typography>
                         </CardSegmentContainer>
                         <CardSegmentContainer sx={{ padding: '0.5rem 0' }}>
                             <AdjustIcon sx={{ margin: '-4px' }} />
@@ -59,23 +58,23 @@ export default function NavigationCard({ icon, label, isActive }: INavigationCar
                         </CardSegmentContainer>
                         <CardSegmentContainer sx={{ alignItems: 'start' }}>
                             <DestinationContainer >
-                                <Typography fontWeight={'bold'}>Estacao sao bento</Typography>
-                                <Typography>Porto</Typography>
+                                <Typography fontWeight={'bold'}>{tripInfo.fromLocation}</Typography>
+                                <Typography>{tripInfo.from.label}</Typography>
                             </DestinationContainer>
                             <DestinationContainer >
-                                <Typography fontWeight={'bold'}>Apolonia</Typography>
-                                <Typography>Lisboa</Typography>
+                                <Typography fontWeight={'bold'}>{tripInfo.toLocation}</Typography>
+                                <Typography>{tripInfo.to.label}</Typography>
                             </DestinationContainer>
                         </CardSegmentContainer>
                     </RowFlexContainer>
                     <CardSegmentContainer>
-                        <Typography fontWeight={'bold'}>10,00€</Typography>
+                        <Typography fontWeight={'bold'}>{tripInfo.price}€</Typography>
                     </CardSegmentContainer>
                 </RowFlexContainer>
                 <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row' }} >
                     <BottomCardContainer >
                         <AccountCircleIcon sx={{ height: '3rem', width: '3rem' }} />
-                        <Typography>Julia</Typography>
+                        <Typography>{tripInfo.user.name}</Typography>
                     </BottomCardContainer>
                     <BottomCardContainer >
                         <AccessibleIcon />

@@ -1,19 +1,55 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { Button, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { ReactComponent as Logo } from '../assets/logo.svg'
 import SearchBox from '../../components/searchBox';
+import { CityInfo } from '../../types/types';
+import { fetchCities } from '../../service/service';
+import { Dayjs } from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 export default function DestinationSearchCard() {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
-    const [age, setAge] = useState(1);
+    const navigate = useNavigate()
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const [cities, setCities] = useState<CityInfo[]>([]);
+    const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
+    const [toLocation, setToLocation] = useState<CityInfo | null>(null);
+    const [startDate, setStartDate] = useState<Dayjs | null>(null);
+    const [seatCount, setSeatCount] = useState(1);
+    const [isFilled, setIsFilled] = useState(false);
+
+    useEffect(() => {
+        const getCities = async () => {
+            const cities = await fetchCities('')
+            setCities(cities)
+        }
+        getCities()
+    }, [])
+
+    const handleChangeDate = (value: Dayjs) => {
+        setStartDate(value)
     };
-    return (
 
+    const handleChangeSeats = (event: SelectChangeEvent) => {
+        setSeatCount(parseInt(event.target.value))
+    };
+
+    const handleSearch = () => {
+        navigate(`/from/${fromLocation?.label}/to/${toLocation?.label}/date/${startDate?.format('DD-MM-YYYY')}`)
+    }
+    useEffect(() => {
+        if (fromLocation && toLocation && startDate && seatCount) {
+            setIsFilled(true)
+        }
+        else {
+            setIsFilled(false)
+        }
+    }, [fromLocation, seatCount, startDate, toLocation])
+
+    if (!cities) return null
+    return (
         <Box
             sx={{
                 height: '12rem',
@@ -35,15 +71,30 @@ export default function DestinationSearchCard() {
                     'search-button search-button search-button search-button'`
             }}
         >
-            <SearchBox sx={{ gridArea: 'from' }} label="from" />
-            <SearchBox sx={{ gridArea: 'to' }} label="to" />
-            <DatePicker slotProps={{ textField: { size: 'small' } }} sx={{ gridArea: 'date-picker' }} />
+            <SearchBox
+                sx={{ gridArea: 'from' }}
+                label="from"
+                updateLocation={(newValue) => setFromLocation(newValue)}
+                cities={cities}
+            />
+            <SearchBox
+                sx={{ gridArea: 'to' }}
+                label="to"
+                updateLocation={(newValue) => setToLocation(newValue)}
+                cities={cities}
+            />
+            <DatePicker
+                onChange={(newValue) => handleChangeDate(newValue as Dayjs)}
+                slotProps={{ textField: { size: 'small' } }}
+                sx={{ gridArea: 'date-picker' }}
+
+            />
             <Select
                 size='small'
                 sx={{ gridArea: 'seat-select' }}
-                value={age.toString()}
+                value={seatCount.toString()}
                 label="Seats"
-                onChange={handleChange}
+                onChange={handleChangeSeats}
             >
                 {[...Array(5 + 1).keys()].slice(1).map(x => (
                     <MenuItem value={x}>{x}</MenuItem>
@@ -56,7 +107,14 @@ export default function DestinationSearchCard() {
                 fontWeight: 700,
                 fontSize: '1rem',
                 color: 'primary.contrastText'
-            }} fullWidth variant="contained">Pesquisar</Button>
+            }}
+                onClick={() => handleSearch()}
+                fullWidth
+                variant="contained"
+                disabled={!isFilled}
+            >
+                Pesquisar
+            </Button>
         </Box >
     );
 }
