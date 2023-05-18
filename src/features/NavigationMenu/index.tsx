@@ -25,7 +25,7 @@ export default function NavigationMenu() {
             }}>
             <NavigationButton icon={<SearchIcon />} label={'Search'} isActive />
             <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'} />
-            <NavigationButton icon={<Logo height={'3rem'} />} />
+            <NavigationButton icon={<Logo style={{ opacity: '0.5' }} height={'3rem'} />} />
             <NavigationButton icon={<Person2Icon />} label={'Messages'} />
             <NavigationButton icon={<ForumIcon />} label={'Profile'} />
 

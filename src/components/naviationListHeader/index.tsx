@@ -24,7 +24,7 @@ export default function NaviagationListHeader({ from, to, date }: INaviagationLi
             position: 'fixed',
             top: '0',
             left: 0,
-            backgroundColor: 'grey.400',
+            backgroundColor: 'primary.light',
             height: '4rem'
         }}>
             <IconButton onClick={() => { navigate(-1) }} >

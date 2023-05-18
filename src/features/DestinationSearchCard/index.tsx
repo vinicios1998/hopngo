@@ -1,9 +1,7 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import { Button, Container, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
-import { useEffect, useMemo, useState } from 'react';
+import { Button, Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
-import { ReactComponent as Logo } from '../assets/logo.svg'
 import SearchBox from '../../components/searchBox';
 import { CityInfo, TripSearchParams } from '../../types/types';
 import { fetchCities } from '../../service/service';

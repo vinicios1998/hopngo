@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Container } from '@mui/material';
+import { Alert, Box, Button, Container, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import NavigationCard from '../../components/navigationCard';
 import NaviagationListHeader from '../../components/naviationListHeader';
@@ -14,6 +14,7 @@ export default function NavigationList() {
     const [availableTrips, setAvailableTrips] = useState<TripInfo[]>([]);
     const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
     const [toLocation, setToLocation] = useState<CityInfo | null>(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const getCities = async () => {
@@ -32,6 +33,11 @@ export default function NavigationList() {
     }, [date, from, to])
 
     if (!date || !from || !to) return null
+
+
+    const handleClick = () => {
+        setOpen(true);
+    };
     return (
         <Container sx={{ padding: '0' }}>
             <NaviagationListHeader from={from} to={to} date={dayjs(date, 'DD-MM-YYYY')} />
@@ -57,7 +63,9 @@ export default function NavigationList() {
                         color: 'primary.contrastText',
                     }}
                     size='large'
-                    variant="contained">
+                    variant="contained"
+                    onClick={handleClick}
+                >
                     Track trips
                 </Button>
                 <Button sx={{
@@ -70,6 +78,12 @@ export default function NavigationList() {
                     Filter
                 </Button>
             </Box>
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                open={open} autoHideDuration={3000}>
+                <Alert severity="success" sx={{ width: '100%' }} onClick={() => setOpen(false)}>
+                    We'll let you know when new trips come up!
+                </Alert>
+            </Snackbar>
         </Container>
     );
 }

@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessibleIcon from '@mui/icons-material/Accessible';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { TripInfo } from '../../types/types';
+import { useNavigate } from 'react-router-dom';
 
 
 interface INavigationCardProps {
@@ -41,15 +42,20 @@ const BottomCardContainer = styled(Box)({
     flexGrow: 1
 });
 export default function NavigationCard({ tripInfo }: INavigationCardProps) {
+    const navigate = useNavigate()
+
+    const handleSelect = () => {
+        navigate(`/from/${tripInfo.from.label}/to/${tripInfo.to.label}/trip/${tripInfo.id}`)
+    }
     return (
 
-        <Container sx={{ padding: '0.5rem 0' }} id="navigation-card-container">
+        <Container sx={{ padding: '0.5rem 0' }} id="navigation-card-container" onClick={() => handleSelect()}>
             <Box >
                 <RowFlexContainer>
                     <RowFlexContainer>
                         <CardSegmentContainer >
                             <Typography>{tripInfo.date.format('HH:mm')}</Typography>
-                            <Typography>{tripInfo.date.add(tripInfo.duration, 'hour').format('HH:mm')}</Typography>
+                            <Typography>{tripInfo.date.add(tripInfo.duration, 'minute').format('HH:mm')}</Typography>
                         </CardSegmentContainer>
                         <CardSegmentContainer sx={{ padding: '0.5rem 0' }}>
                             <AdjustIcon sx={{ margin: '-4px' }} />

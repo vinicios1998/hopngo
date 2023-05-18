@@ -7,7 +7,7 @@ export interface CityInfo {
     lng: number
 }
 
-interface User {
+export interface User {
     id: number;
     name: string;
     surname: string;
@@ -23,6 +23,7 @@ export interface TripSearchParams {
 }
 
 export interface TripInfo {
+    id: number,
     user: User,
     from: CityInfo,
     fromLocation: string

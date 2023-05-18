@@ -1,6 +1,7 @@
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import cities from '../mock/cities.json'
 import users from '../mock/users.json'
+import rides from '../mock/rides.json'
 import { CityInfo, TripInfo } from '../types/types';
 
 
@@ -27,20 +28,51 @@ export const getCityInfo = async (text: string) => {
 };
 export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayjs) => {
     try {
-        const numberOfUsers = getRandomInteger(3, 15)
-        const shuffledUsers = users.sort(() => Math.random() - 0.5);
-        const randomUsers = shuffledUsers.slice(0, numberOfUsers);
-        return randomUsers.map((x, i) => ({
-            user: x,
-            from: from,
-            to: to,
-            date: date.add(getRandomInteger(0, 20), 'hour'),
-            price: getRandomInteger(5, 20),
-            duration: getRandomInteger(1, 6)
-        })) as TripInfo[]
+        const filtered = rides.filter(x => x.from === from.label && x.to === to.label)
+        const result = [] as TripInfo[]
+
+        filtered.forEach((x, i) => {
+            const user = users.find(u => u.id === x.user)
+            if (!user) return
+            result.unshift({
+                id: x.id,
+                user: user,
+                from: from,
+                fromLocation: x.fromLocation,
+                to: to,
+                toLocation: x.toLocation,
+                date: dayjs(x.date, 'DD-MM-YYYY').add(getRandomInteger(0, 20), 'hour'),
+                price: x.price,
+                duration: x.duration
+            } as TripInfo)
+        })
+        return result
     } catch (err) {
         console.log(err)
         return [];
+    }
+};
+
+export const getTrip = async (id: number, from: CityInfo, to: CityInfo) => {
+    try {
+        const tripMock = rides.find(x => x.id === id)
+        if (!tripMock) return null
+        const user = users.find(u => u.id === tripMock.user)
+        if (!user) return null
+        return {
+            id: tripMock.id,
+            user: user,
+            from: from,
+            fromLocation: tripMock.fromLocation,
+            to: to,
+            toLocation: tripMock.toLocation,
+            date: dayjs(tripMock.date, 'DD-MM-YYYY').add(getRandomInteger(0, 20), 'hour'),
+            price: tripMock.price,
+            duration: tripMock.duration
+        } as TripInfo
+    } catch (err) {
+        console.log(err)
+        return null;
     }
 };
 export const fetchCitiesNames = async (text: string) => {

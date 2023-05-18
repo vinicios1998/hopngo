@@ -1,6 +1,6 @@
 [
   {
-    "label": "Lisbon",
+    "label": "Lisboa",
     "country": "Portugal",
     "lat": "38.7253",
     "lng": "-9.1500"
@@ -10,6 +10,12 @@
     "country": "Portugal",
     "lat": "41.1621",
     "lng": "-8.6220"
+  },
+  {
+    "label": "Aveiro",
+    "country": "Portugal",
+    "lat": "40.6333",
+    "lng": "-8.6500"
   },
   {
     "label": "Aves",
@@ -160,12 +166,6 @@
     "country": "Portugal",
     "lat": "38.6667",
     "lng": "-9.0667"
-  },
-  {
-    "label": "Aveiro",
-    "country": "Portugal",
-    "lat": "40.6333",
-    "lng": "-8.6500"
   },
   {
     "label": "Queluz",

@@ -1,32 +1,28 @@
 import * as React from 'react';
-import { Box, Button, Container, SelectChangeEvent, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import NavigationCard from '../../components/navigationCard';
-import NaviagationListHeader from '../../components/naviationListHeader';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCityInfo, getTrip } from '../../service/service';
 import { CityInfo, TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
 import DateHeader from '../../components/dateHeader/dateHeader';
-import dayjs from 'dayjs';
-import { Padding } from '@mui/icons-material';
 import UserCard from '../../components/userCard';
+import ApplePay from '../../assets/apple-pay.jpg';
+import MbWay from '../../assets/mbway.png';
 
-export default function ReviewTrip() {
-    const navigate = useNavigate()
+export default function ConfirmTrip() {
     const { from, to, idTrip } = useParams()
 
     const [trip, setTrip] = useState<TripInfo | null>();
-    const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
-    const [toLocation, setToLocation] = useState<CityInfo | null>(null);
+    const [payment, setPayment] = useState("apple");
+
+
 
     useEffect(() => {
         const getCities = async () => {
             if (!from || !to || !idTrip) return
             const fromInfo = await getCityInfo(from)
             const toInfo = await getCityInfo(to)
-            setFromLocation(fromInfo)
-            setToLocation(toInfo)
             if (fromInfo && toInfo && idTrip) {
                 const trip = await getTrip(parseInt(idTrip), fromInfo, toInfo)
                 setTrip(trip)
@@ -37,9 +33,7 @@ export default function ReviewTrip() {
     }, [idTrip, from, to])
 
     if (!idTrip || !from || !to || !trip) return null
-    const handleSelect = () => {
-        navigate(`/from/${trip.from.label}/to/${trip.to.label}/trip/${trip.id}/confirmation`)
-    }
+
     return (
         <Container sx={{ padding: '0' }}>
             <DateHeader date={trip.date} />
@@ -61,20 +55,48 @@ export default function ReviewTrip() {
                 <Typography>Preço total</Typography>
                 <Typography>{trip.price}€</Typography>
             </Container>
-            <UserCard user={trip.user} />
-            <Button
-                onClick={() => handleSelect()}
-                sx={{
-                    fontWeight: 700,
-                    fontSize: '1rem',
-                    color: 'primary.contrastText',
-                    position: 'fixed',
-                    bottom: 0
-                }}
+
+            <Container sx={{
+                padding: '2rem 0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                flexDirection: 'row',
+            }}>
+                <img
+                    style={{
+                        height: '3rem',
+                        border: `#fbc02d ${payment === "apple" ? 'solid' : 'none'}`,
+                        borderRadius: '8px',
+                        padding: '0.5rem'
+                    }}
+                    src={ApplePay}
+                    alt="ApplePay"
+                    onClick={() => setPayment("apple")}
+                />
+                <img
+                    style={{
+                        height: '3rem',
+                        border: `#fbc02d ${payment === "mbway" ? 'solid' : 'none'}`,
+                        borderRadius: '8px',
+                        padding: '0.5rem'
+                    }}
+                    src={MbWay}
+                    alt="MbWay"
+                    onClick={() => setPayment("mbway")}
+                />
+            </Container>
+            <Button sx={{
+                fontWeight: 700,
+                fontSize: '1rem',
+                color: 'primary.contrastText',
+                position: 'fixed',
+                bottom: 0
+            }}
                 fullWidth
                 size='large'
                 variant="contained">
-                Continue
+                Confirm
             </Button>
         </Container>
     );
