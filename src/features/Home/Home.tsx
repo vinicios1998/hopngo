@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg'
 import DestinationSearchCard from '../DestinationSearchCard';
 import SearchHistory from '../SearchHistory';
 import NavigationMenu from '../NavigationMenu';
+import AppInfo from '../../components/appInfo';
 
 export default function BoxSx() {
 
@@ -18,13 +19,14 @@ export default function BoxSx() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     padding: '1rem',
-                    borderRadius: '0 0 2rem 2rem'
+                    borderRadius: '0 0 1rem 1rem'
                 }}
             >
                 <Logo style={{ opacity: '0.5' }} height={'2rem'} />
                 <Typography sx={{ textShadow: '0px 4px 4px rgba(0, 0, 0, 0.50)' }} fontWeight={'bold'} fontSize={32} color={'white'} > Hop n' Go</Typography>
                 <DestinationSearchCard />
             </Container >
+            <AppInfo />
             <SearchHistory />
             <NavigationMenu />
         </Container>

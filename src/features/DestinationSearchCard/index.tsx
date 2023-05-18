@@ -70,18 +70,27 @@ export default function DestinationSearchCard() {
                 alignContent: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '9px',
+                borderRadius: '1rem',
                 padding: '1rem',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr 1fr 1fr',
-                gridTemplateRows: '1fr 1fr 1fr 1fr',
+                gridTemplateRows: {
+                    xs: '1fr 1fr 1fr 1fr',
+                    md: '1fr 1fr 1fr',
+                },
                 gridColumnGap: '0.5rem',
                 gridRowGap: '0.5rem',
-                gridTemplateAreas: `
-                    'from from from from'
-                    'to to to to'
-                    'date-picker date-picker date-picker seat-select'
-                    'search-button search-button search-button search-button'`
+                gridTemplateAreas: {
+                    xs:
+                        `'from from from from'
+                        'to to to to'
+                        'date-picker date-picker date-picker seat-select'
+                        'search-button search-button search-button search-button'`,
+                    md:
+                        `'from from to to'
+                'date-picker date-picker seat-select seat-select'
+                'search-button search-button search-button search-button'`
+                }
             }}
         >
             <SearchBox

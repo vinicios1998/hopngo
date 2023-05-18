@@ -17,10 +17,10 @@ export default function NavigationMenu() {
                 position: 'fixed',
                 bottom: 0,
                 backgroundColor: 'primary.light',
-                borderRadius: '2rem 2rem 0 0',
+                borderRadius: '1rem 1rem 0 0',
                 padding: {
                     xs: '0.5rem',
-                    lg: '1rem'
+                    lg: '0.3rem'
                 }
             }}>
             <NavigationButton icon={<SearchIcon />} label={'Search'} isActive />

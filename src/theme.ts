@@ -10,4 +10,8 @@ export const themeOptions: ThemeOptions = createTheme({
             main: '#00b0ff',
         },
     },
+    typography: {
+        htmlFontSize: 20,
+    },
+
 });

@@ -25,7 +25,7 @@ export default function HistoryCard({ searchParams, sx }: IHistoryCardProps) {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
 
                     <Typography>{searchParams.from}</Typography>
-                    <ArrowRightAltIcon />
+                    <ArrowRightAltIcon sx={{ padding: '0 2rem' }} />
                     <Typography>{searchParams.to}</Typography>
                 </Box>
                 <Typography>{date.format('dddd')}, {date.format('DD MMM')}</Typography>

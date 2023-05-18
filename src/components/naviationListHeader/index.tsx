@@ -24,6 +24,7 @@ export default function NaviagationListHeader({ from, to, date }: INaviagationLi
             position: 'fixed',
             top: '0',
             left: 0,
+            right: 0,
             backgroundColor: 'primary.light',
             height: '4rem'
         }}>
