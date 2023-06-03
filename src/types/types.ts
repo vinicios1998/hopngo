@@ -1,8 +1,14 @@
 import { Dayjs } from "dayjs";
 
+export enum Menus {
+    SEARCH,
+    PUBLISH,
+    MESSAGES,
+    PROFILE
+}
 export interface CityInfo {
+    place_id: string,
     label: string,
-    country: string,
     lat: number,
     lng: number
 }

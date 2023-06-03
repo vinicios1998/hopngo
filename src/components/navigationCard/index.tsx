@@ -43,9 +43,10 @@ const BottomCardContainer = styled(Box)({
 });
 export default function NavigationCard({ tripInfo }: INavigationCardProps) {
     const navigate = useNavigate()
+    console.log(tripInfo)
 
     const handleSelect = () => {
-        navigate(`/from/${tripInfo.from.label}/to/${tripInfo.to.label}/trip/${tripInfo.id}`)
+        navigate(`/reserve/from/${tripInfo.from}/to/${tripInfo.to}/trip/${tripInfo.id}`)
     }
     return (
 

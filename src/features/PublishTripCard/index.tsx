@@ -9,9 +9,22 @@ import { Dayjs } from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import SearchGoogleMaps from '../../components/googleMapsAutoComplete';
 
-export default function DestinationSearchCard() {
-    const navigate = useNavigate()
+const GOOGLE_MAPS_API_KEY = 'AIzaSyCgKhr4o6KXqYrzwl-tqgltHRtIsHcTsJE';
 
+function loadScript(src: string, position: HTMLElement | null, id: string) {
+    if (!position) {
+        return;
+    }
+
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('id', id);
+    script.src = src;
+    position.appendChild(script);
+}
+
+export default function PublishTripCard() {
+    const navigate = useNavigate()
     const [cities, setCities] = useState<CityInfo[]>([]);
     const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
     const [toLocation, setToLocation] = useState<CityInfo | null>(null);
@@ -36,24 +49,11 @@ export default function DestinationSearchCard() {
     };
 
     const handleSearch = () => {
+        console.log(fromLocation, toLocation)
         if (!fromLocation || !toLocation || !startDate) return
-
-
-        const historyEntry: TripSearchParams = {
-            from: fromLocation.label,
-            to: toLocation.label,
-            date: startDate.format('DD-MM-YYYY'),
-            seats: seatCount
-        }
-        let history = [] as TripSearchParams[]
-        const historyJson = localStorage.getItem('search-history')
-        if (historyJson) {
-            history = JSON.parse(historyJson) as TripSearchParams[]
-        }
-        history.unshift(historyEntry)
-        localStorage.setItem('search-history', JSON.stringify(history))
-        navigate(`/reserve/from/${fromLocation?.place_id}/to/${toLocation?.place_id}/date/${startDate?.format('DD-MM-YYYY')}`)
+        navigate(`/publish/from/${fromLocation?.place_id}/to/${toLocation?.place_id}/date/${startDate?.format('DD-MM-YYYY')}`)
     }
+
     useEffect(() => {
         if (fromLocation && toLocation && startDate && seatCount) {
             setIsFilled(true)
@@ -126,7 +126,7 @@ export default function DestinationSearchCard() {
                 variant="contained"
                 disabled={!isFilled}
             >
-                Pesquisar
+                Publish
             </Button>
         </Container >
     );

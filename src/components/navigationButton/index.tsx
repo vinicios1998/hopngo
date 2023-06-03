@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 interface INavigationButtonProps {
     icon?: JSX.Element | null
     label?: string | null
-    isActive?: boolean
+    isActive?: boolean,
+    onClick?:()=>void
 }
-export default function NavigationButton({ icon, label, isActive }: INavigationButtonProps) {
+export default function NavigationButton({ icon, label, isActive, onClick }: INavigationButtonProps) {
     return (
-        <Box sx={{
+        <Button 
+        onClick={onClick}
+        sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -17,8 +20,8 @@ export default function NavigationButton({ icon, label, isActive }: INavigationB
             color: isActive ? 'text.primary' : 'text.secondary',
         }}>
             {icon}
-            {label && <Typography fontWeight={isActive ? 'bold' : 'normal'} fontSize={'1rem'} > {label}</Typography>}
-        </Box>
+            {label && <Typography fontWeight={isActive ? 'bold' : 'normal'} fontSize={'0.8rem'} > {label}</Typography>}
+        </Button>
 
     );
 }

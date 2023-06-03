@@ -4,41 +4,53 @@ import { useEffect, useState } from 'react';
 import NavigationCard from '../../components/navigationCard';
 import NaviagationListHeader from '../../components/naviationListHeader';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCityInfo, getTrip } from '../../service/service';
+import { getCityInfo, getTrip, postTrip } from '../../service/service';
 import { CityInfo, TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
 import DateHeader from '../../components/dateHeader/dateHeader';
 import dayjs from 'dayjs';
 import { Padding } from '@mui/icons-material';
 import UserCard from '../../components/userCard';
+import users from '../../mock/users.json'
 
 export default function ReviewTrip() {
     const navigate = useNavigate()
-    const { from, to, idTrip } = useParams()
-
-    const [trip, setTrip] = useState<TripInfo | null>();
+    const { from, to, date } = useParams()
+    const dateDayjs = dayjs(date, 'DD-MM-YYYY')
     const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
     const [toLocation, setToLocation] = useState<CityInfo | null>(null);
 
     useEffect(() => {
         const getCities = async () => {
-            if (!from || !to || !idTrip) return
+            if (!from || !to) return
             const fromInfo = await getCityInfo(from)
             const toInfo = await getCityInfo(to)
             setFromLocation(fromInfo)
             setToLocation(toInfo)
-            if (fromInfo && toInfo && idTrip) {
-                const trip = await getTrip(parseInt(idTrip), fromInfo, toInfo)
-                setTrip(trip)
-            }
 
         }
         getCities()
-    }, [idTrip, from, to])
+    }, [from, to])
 
-    if (!idTrip || !from || !to || !trip) return null
-    const handleSelect = () => {
-        navigate(`/from/${trip.from.label}/to/${trip.to.label}/trip/${trip.id}/confirmation`)
+    if (!from || !to || !fromLocation || !toLocation) return null
+
+    const trip = {
+        id: 0,
+        user: users[0],
+        from: fromLocation,
+        fromLocation: fromLocation.label,
+        to: toLocation,
+        toLocation: toLocation.label,
+        availableSeats: 2,
+        date: dateDayjs,
+        duration: 2,
+        price: 2
+    } as TripInfo
+
+    const handleSelect = async () => {
+
+        await postTrip(trip)
+        navigate(`/`)
     }
     return (
         <Container sx={{ padding: '0' }}>
@@ -50,17 +62,7 @@ export default function ReviewTrip() {
             <Container sx={{ padding: '1rem' }}>
                 <DestinationInfo tripInfo={trip} />
             </Container>
-            <Container sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                backgroundColor: 'primary.light',
-                padding: '1rem'
-            }}>
-                <Typography>Preço total</Typography>
-                <Typography>{trip.price}€</Typography>
-            </Container>
+            <Typography sx={{ textAlign: 'center', padding: '2rem' }} fontSize={'2rem'}>Your profile</Typography>
             <UserCard user={trip.user} />
             <Button
                 onClick={() => handleSelect()}
@@ -74,7 +76,7 @@ export default function ReviewTrip() {
                 fullWidth
                 size='large'
                 variant="contained">
-                Continue
+                Publish
             </Button>
         </Container>
     );

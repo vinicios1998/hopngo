@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Container, Typography } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import DestinationSearchCard from '../DestinationSearchCard';
-import SearchHistory from '../SearchHistory';
-import NavigationMenu from '../NavigationMenu';
+import DestinationSearchCard from '../../features/DestinationSearchCard';
+import SearchHistory from '../../features/SearchHistory';
+import NavigationMenu from '../../features/NavigationMenu';
 import AppInfo from '../../components/appInfo';
+import { Menus } from '../../types/types';
 
-export default function BoxSx() {
+export default function Home() {
 
     return (
         <Container sx={{ padding: '0' }}>
@@ -28,7 +29,7 @@ export default function BoxSx() {
             </Container >
             <AppInfo />
             <SearchHistory />
-            <NavigationMenu />
+            <NavigationMenu currentPage={Menus.SEARCH}/>
         </Container>
     );
 }

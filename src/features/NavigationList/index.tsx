@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, Box, Button, Container, Snackbar } from '@mui/material';
+import { Alert, Box, Button, Container, Snackbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import NavigationCard from '../../components/navigationCard';
 import NaviagationListHeader from '../../components/naviationListHeader';
@@ -32,7 +32,7 @@ export default function NavigationList() {
         getCities()
     }, [date, from, to])
 
-    if (!date || !from || !to) return null
+    if (!date || !from || !to || !fromLocation || !toLocation) return null
 
 
     const handleClick = () => {
@@ -40,10 +40,10 @@ export default function NavigationList() {
     };
     return (
         <Container sx={{ padding: '0' }}>
-            <NaviagationListHeader from={from} to={to} date={dayjs(date, 'DD-MM-YYYY')} />
+            <NaviagationListHeader from={fromLocation.label} to={toLocation.label} date={dayjs(date, 'DD-MM-YYYY')} />
             <Container sx={{ marginTop: '4rem' }}>
                 {availableTrips.map(x => (<NavigationCard tripInfo={x} />))}
-
+                {availableTrips.length === 0 && <Typography fontWeight={'bold'} fontSize={'1rem'} sx={{ textAlign: 'center', padding: '2rem' }}>Sorry, we do not have any registered trips for this route.</Typography>}
             </Container>
             <Box
                 sx={{

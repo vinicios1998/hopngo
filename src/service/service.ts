@@ -13,14 +13,22 @@ const getRandomInteger = (min: number, max: number) => {
 export const getCityInfo = async (text: string) => {
     try {
         if (!text) return null
-        const filteredCities = cities.find(city => city.label.toUpperCase() === text.toUpperCase())
-        if (!filteredCities) return null
-        return {
-            label: filteredCities.label,
-            country: filteredCities.country,
-            lat: parseFloat(filteredCities.lat),
-            lng: parseFloat(filteredCities.lng)
-        } as CityInfo
+        const response = await fetch(
+            `http://localhost:3001/api/geocode?placeId=${text}`
+        );
+        const data = await response.json();
+        console.log(data)
+        if (data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            const label = data.results[0].formatted_address
+            return {
+                place_id: text,
+                label: label,
+                lat: parseFloat(lat),
+                lng: parseFloat(lng)
+            } as CityInfo
+        }
+        return null
     } catch (err) {
         console.log(err)
         return null;
@@ -28,25 +36,32 @@ export const getCityInfo = async (text: string) => {
 };
 export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayjs) => {
     try {
-        const filtered = rides.filter(x => x.from === from.label && x.to === to.label)
-        const result = [] as TripInfo[]
+        const response = await fetch(
+            `http://localhost:3001/api/trips/from/${from.place_id}/to/${to.place_id}/date/${date.format('DD-MM-YYYY')}`
+        );
+        const data = await response.json() as TripInfo[]
+        return data.map(x => ({
+            ...x,
+            date: dayjs(x.date, 'YYYY-MM-DD HH:mm:ss')
+        }))
+    } catch (err) {
+        console.log(err)
+        return [];
+    }
+};
 
-        filtered.forEach((x, i) => {
-            const user = users.find(u => u.id === x.user)
-            if (!user) return
-            result.unshift({
-                id: x.id,
-                user: user,
-                from: from,
-                fromLocation: x.fromLocation,
-                to: to,
-                toLocation: x.toLocation,
-                date: dayjs(x.date, 'DD-MM-YYYY').add(getRandomInteger(0, 20), 'hour'),
-                price: x.price,
-                duration: x.duration
-            } as TripInfo)
-        })
-        return result
+export const postTrip = async (tripInfo: TripInfo) => {
+    try {
+        const newItem = { ...tripInfo, date: tripInfo.date?.format('DD-MM-YYYY') }
+        const response = await fetch(
+            `http://localhost:3001/api/trips`
+            , {
+                mode: 'cors',
+                method: 'POST', body: JSON.stringify(newItem), headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+        await response.json()
     } catch (err) {
         console.log(err)
         return [];
@@ -93,7 +108,6 @@ export const fetchCities = async (text: string) => {
             filteredCities = cities.filter(city => city.label.toUpperCase().startsWith(text.toUpperCase()))
         return filteredCities.map(x => ({
             label: x.label,
-            country: x.country,
             lat: parseFloat(x.lat),
             lng: parseFloat(x.lng)
         })) as CityInfo[]

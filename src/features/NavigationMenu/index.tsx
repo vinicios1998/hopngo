@@ -6,8 +6,14 @@ import Person2Icon from '@mui/icons-material/Person2';
 import NavigationButton from '../../components/navigationButton';
 import ForumIcon from '@mui/icons-material/Forum';
 import { ReactComponent as Logo } from '../../assets/logo.svg'
+import { Menus } from '../../types/types';
+import { useNavigate } from 'react-router-dom';
 
-export default function NavigationMenu() {
+interface INavigationMenuProps{
+currentPage: Menus
+}
+export default function NavigationMenu({currentPage}:INavigationMenuProps) {
+    const navigate = useNavigate()
     return (
         <Container
             sx={{
@@ -23,11 +29,11 @@ export default function NavigationMenu() {
                     lg: '0.3rem'
                 }
             }}>
-            <NavigationButton icon={<SearchIcon />} label={'Search'} isActive />
-            <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'} />
+            <NavigationButton icon={<SearchIcon />} label={'Search'} isActive={currentPage===Menus.SEARCH} onClick={()=>navigate("/")}/>
+            <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'}  isActive={currentPage===Menus.PUBLISH}  onClick={()=>navigate("/publish")}/>
             <NavigationButton icon={<Logo style={{ opacity: '0.5' }} height={'3rem'} />} />
-            <NavigationButton icon={<Person2Icon />} label={'Messages'} />
-            <NavigationButton icon={<ForumIcon />} label={'Profile'} />
+            <NavigationButton icon={<Person2Icon />} label={'Messages'}  isActive={currentPage===Menus.MESSAGES}/>
+            <NavigationButton icon={<ForumIcon />} label={'Profile'}  isActive={currentPage===Menus.PROFILE} />
 
         </Container>
     );

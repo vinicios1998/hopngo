@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getCityInfo, getTrip } from '../../service/service';
 import { CityInfo, TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
@@ -12,6 +12,7 @@ import MbWay from '../../assets/mbway.png';
 
 export default function ConfirmTrip() {
     const { from, to, idTrip } = useParams()
+    const navigate = useNavigate()
 
     const [trip, setTrip] = useState<TripInfo | null>();
     const [payment, setPayment] = useState("apple");
@@ -33,7 +34,9 @@ export default function ConfirmTrip() {
     }, [idTrip, from, to])
 
     if (!idTrip || !from || !to || !trip) return null
-
+    const handleSelect = () => {
+        navigate(`/`)
+    }
     return (
         <Container sx={{ padding: '0' }}>
             <DateHeader date={trip.date} />
@@ -86,13 +89,15 @@ export default function ConfirmTrip() {
                     onClick={() => setPayment("mbway")}
                 />
             </Container>
-            <Button sx={{
-                fontWeight: 700,
-                fontSize: '1rem',
-                color: 'primary.contrastText',
-                position: 'fixed',
-                bottom: 0
-            }}
+            <Button
+                onClick={() => handleSelect()}
+                sx={{
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    color: 'primary.contrastText',
+                    position: 'fixed',
+                    bottom: 0
+                }}
                 fullWidth
                 size='large'
                 variant="contained">
