@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import { SxProps, TextField, Theme } from '@mui/material';
 import { CityInfo } from '../../types/types';

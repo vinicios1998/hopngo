@@ -3,10 +3,9 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCityInfo, getTrip } from '../../service/service';
-import { CityInfo, TripInfo } from '../../types/types';
+import { TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
 import DateHeader from '../../components/dateHeader/dateHeader';
-import UserCard from '../../components/userCard';
 import ApplePay from '../../assets/apple-pay.jpg';
 import MbWay from '../../assets/mbway.png';
 

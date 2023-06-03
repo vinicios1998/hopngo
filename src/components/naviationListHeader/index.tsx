@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Box, Container, IconButton, SelectChangeEvent, Typography } from '@mui/material';
-import { useState } from 'react';
-import NavigationCard from '../../components/navigationCard';
+import { Box, Container, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import EastIcon from '@mui/icons-material/East';
 import { Dayjs } from 'dayjs';

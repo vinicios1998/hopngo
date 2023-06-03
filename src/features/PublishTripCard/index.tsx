@@ -2,26 +2,12 @@ import * as React from 'react';
 import { Button, Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
-import SearchBox from '../../components/searchBox';
-import { CityInfo, TripSearchParams } from '../../types/types';
+import { CityInfo } from '../../types/types';
 import { fetchCities } from '../../service/service';
 import { Dayjs } from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import SearchGoogleMaps from '../../components/googleMapsAutoComplete';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCgKhr4o6KXqYrzwl-tqgltHRtIsHcTsJE';
-
-function loadScript(src: string, position: HTMLElement | null, id: string) {
-    if (!position) {
-        return;
-    }
-
-    const script = document.createElement('script');
-    script.setAttribute('async', '');
-    script.setAttribute('id', id);
-    script.src = src;
-    position.appendChild(script);
-}
 
 export default function PublishTripCard() {
     const navigate = useNavigate()

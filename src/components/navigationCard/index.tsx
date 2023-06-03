@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Divider, SxProps, Theme, Typography, styled } from '@mui/material';
+import { Box, Container, Divider, Typography, styled } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessibleIcon from '@mui/icons-material/Accessible';

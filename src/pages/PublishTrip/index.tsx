@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { Container, Typography } from '@mui/material';
-import { ReactComponent as Logo } from '../../assets/logo.svg'
 import PublishTripCard from '../../features/PublishTripCard';
 import NavigationMenu from '../../features/NavigationMenu';
 import { Menus } from '../../types/types';
-import SimpleMap from '../../components/map';
 
 export default function PublishTrip() {
 

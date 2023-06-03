@@ -12,12 +12,6 @@ const RowFlexContainer = styled(Box)({
     padding: '1rem'
 });
 
-const BottomCardContainer = styled(Box)({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexGrow: 1
-});
 export default function AppInfo() {
 
 

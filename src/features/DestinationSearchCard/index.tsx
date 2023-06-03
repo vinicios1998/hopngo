@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button, Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
-import SearchBox from '../../components/searchBox';
 import { CityInfo, TripSearchParams } from '../../types/types';
 import { fetchCities } from '../../service/service';
 import { Dayjs } from 'dayjs';

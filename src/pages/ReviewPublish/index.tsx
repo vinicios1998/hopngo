@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { Box, Button, Container, SelectChangeEvent, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import NavigationCard from '../../components/navigationCard';
-import NaviagationListHeader from '../../components/naviationListHeader';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCityInfo, getTrip, postTrip } from '../../service/service';
+import { getCityInfo, postTrip } from '../../service/service';
 import { CityInfo, TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
 import DateHeader from '../../components/dateHeader/dateHeader';
 import dayjs from 'dayjs';
-import { Padding } from '@mui/icons-material';
 import UserCard from '../../components/userCard';
 import users from '../../mock/users.json'
 

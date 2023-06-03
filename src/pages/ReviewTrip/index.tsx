@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { Box, Button, Container, SelectChangeEvent, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import NavigationCard from '../../components/navigationCard';
-import NaviagationListHeader from '../../components/naviationListHeader';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCityInfo, getTrip } from '../../service/service';
-import { CityInfo, TripInfo } from '../../types/types';
+import { TripInfo } from '../../types/types';
 import DestinationInfo from '../../components/destinationInfo';
 import DateHeader from '../../components/dateHeader/dateHeader';
-import dayjs from 'dayjs';
-import { Padding } from '@mui/icons-material';
 import UserCard from '../../components/userCard';
 
 export default function ReviewTrip() {
@@ -17,16 +13,12 @@ export default function ReviewTrip() {
     const { from, to, idTrip } = useParams()
 
     const [trip, setTrip] = useState<TripInfo | null>();
-    const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
-    const [toLocation, setToLocation] = useState<CityInfo | null>(null);
 
     useEffect(() => {
         const getCities = async () => {
             if (!from || !to || !idTrip) return
             const fromInfo = await getCityInfo(from)
             const toInfo = await getCityInfo(to)
-            setFromLocation(fromInfo)
-            setToLocation(toInfo)
             if (fromInfo && toInfo && idTrip) {
                 const trip = await getTrip(parseInt(idTrip), fromInfo, toInfo)
                 setTrip(trip)

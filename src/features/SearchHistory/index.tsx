@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, SelectChangeEvent, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import HistoryCard from '../../components/historyCard';
 import { TripSearchParams } from '../../types/types';
