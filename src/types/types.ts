@@ -7,6 +7,13 @@ export interface NewUserDto {
     password: string;
     bio: string;
 }
+
+export interface UserDto {
+    name: string;
+    surname: string;
+    bio: string;
+}
+
 export interface LoginDto {
     email: string;
     password: string;
@@ -39,7 +46,15 @@ export interface TripSearchParams {
     date: string,
     seats: number
 }
-
+export interface NewTripDto {
+    userId: string,
+    from: CityInfo,
+    to: CityInfo,
+    availableSeats: number
+    date: Dayjs
+    time: Dayjs
+    duration: number
+}
 export interface TripInfo {
     id: number,
     user: User,
@@ -50,7 +65,6 @@ export interface TripInfo {
     availableSeats: number
     date: Dayjs
     duration: number
-    price: number
 }
 
 export interface CityResult {

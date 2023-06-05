@@ -19,7 +19,7 @@ export default function SearchHistory() {
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            padding: '1rem'
+            padding: '1rem',
         }}>
             <Typography fontWeight={'bold'} fontSize={24} > History</Typography>
             {history.map(x => (

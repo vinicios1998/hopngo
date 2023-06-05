@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Button, Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { CityInfo } from '../../types/types';
 import { fetchCities } from '../../service/service';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import SearchGoogleMaps from '../../components/googleMapsAutoComplete';
+import SeatIcon from '@mui/icons-material/EventSeat';
 
 
 export default function PublishTripCard() {
@@ -14,8 +15,9 @@ export default function PublishTripCard() {
     const [cities, setCities] = useState<CityInfo[]>([]);
     const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
     const [toLocation, setToLocation] = useState<CityInfo | null>(null);
-    const [startDate, setStartDate] = useState<Dayjs | null>(null);
+    const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(Date.now()));
     const [seatCount, setSeatCount] = useState(1);
+    const [startTime, setStartTime] = useState<Dayjs | null>(dayjs(Date.now()));
     const [isFilled, setIsFilled] = useState(false);
 
     useEffect(() => {
@@ -29,15 +31,16 @@ export default function PublishTripCard() {
     const handleChangeDate = (value: Dayjs) => {
         setStartDate(value)
     };
-
+    const handleChangeTime = (value: Dayjs) => {
+        setStartTime(value)
+    };
     const handleChangeSeats = (event: SelectChangeEvent) => {
         setSeatCount(parseInt(event.target.value))
     };
 
     const handleSearch = () => {
-        console.log(fromLocation, toLocation)
         if (!fromLocation || !toLocation || !startDate) return
-        navigate(`/publish/from/${fromLocation?.place_id}/to/${toLocation?.place_id}/date/${startDate?.format('DD-MM-YYYY')}`)
+        navigate(`/publish/from/${fromLocation?.place_id}/to/${toLocation?.place_id}/date/${startDate?.format('DD-MM-YYYY')}/time/${startTime?.format('HH-mm')}/seats/${seatCount}`)
     }
 
     useEffect(() => {
@@ -57,39 +60,44 @@ export default function PublishTripCard() {
                 alignContent: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '1rem',
                 padding: '1rem',
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
                 gridTemplateRows: {
-                    xs: '1fr 1fr 1fr 1fr',
-                    md: '1fr 1fr 1fr',
+                    xs: '1fr 1fr 1fr 1fr 1fr',
+                    md: '1fr 1fr 1fr 1fr',
                 },
                 gridColumnGap: '0.5rem',
                 gridRowGap: '0.5rem',
                 gridTemplateAreas: {
                     xs:
-                        `'from from from from'
-                        'to to to to'
-                        'date-picker date-picker date-picker seat-select'
-                        'search-button search-button search-button search-button'`,
+                        `'from from from from from from'
+                        'to to to to to to'
+                        'date-picker date-picker date-picker date-picker  date-picker  date-picker '
+                        'time-picker time-picker time-picker time-picker seat-select seat-select'
+                        'search-button search-button search-button search-button search-button search-button'`,
                     md:
-                        `'from from to to'
-                'date-picker date-picker seat-select seat-select'
-                'search-button search-button search-button search-button'`
-                }
+                        `'from from from from from from'
+                        'to to to to to to'
+                'date-picker date-picker date-picker time-picker time-picker seat-select'
+                'search-button search-button search-button search-button search-button search-button'`
+                },
             }}
         >
             <SearchGoogleMaps sx={{ gridArea: 'from' }} label="from" updateLocation={(newValue) => setFromLocation(newValue)} />
             <SearchGoogleMaps sx={{ gridArea: 'to' }} label="to" updateLocation={(newValue) => setToLocation(newValue)} />
             <DatePicker
                 onChange={(newValue) => handleChangeDate(newValue as Dayjs)}
-                slotProps={{ textField: { size: 'small' } }}
+                value={startDate}
                 sx={{ gridArea: 'date-picker' }}
 
             />
+            <TimePicker sx={{ gridArea: 'time-picker' }}
+                value={startTime}
+                onChange={(newValue) => handleChangeTime(newValue as Dayjs)} />
+
             <Select
-                size='small'
+                IconComponent={SeatIcon}
                 sx={{ gridArea: 'seat-select' }}
                 value={seatCount.toString()}
                 label="Seats"

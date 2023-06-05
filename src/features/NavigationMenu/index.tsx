@@ -9,32 +9,34 @@ import { ReactComponent as Logo } from '../../assets/logo.svg'
 import { Menus } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
 
-interface INavigationMenuProps{
-currentPage: Menus
+interface INavigationMenuProps {
+    currentPage: Menus
 }
-export default function NavigationMenu({currentPage}:INavigationMenuProps) {
+export default function NavigationMenu({ currentPage }: INavigationMenuProps) {
     const navigate = useNavigate()
     return (
-        <Container
-            sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                position: 'fixed',
-                bottom: 0,
-                backgroundColor: 'primary.light',
-                borderRadius: '1rem 1rem 0 0',
-                padding: {
-                    xs: '0.5rem',
-                    lg: '0.3rem'
-                }
-            }}>
-            <NavigationButton icon={<SearchIcon />} label={'Search'} isActive={currentPage===Menus.SEARCH} onClick={()=>navigate("/")}/>
-            <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'}  isActive={currentPage===Menus.PUBLISH}  onClick={()=>navigate("/publish")}/>
-            <NavigationButton icon={<Logo style={{ opacity: '0.5' }} height={'3rem'} />} />
-            <NavigationButton icon={<Person2Icon />} label={'Messages'}  isActive={currentPage===Menus.MESSAGES}/>
-            <NavigationButton icon={<ForumIcon />} label={'Profile'}  isActive={currentPage===Menus.PROFILE} />
+        <Container disableGutters maxWidth={false} >
+            <Container
+                disableGutters maxWidth={false}
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    position: 'fixed',
+                    bottom: 0,
+                    backgroundColor: 'primary.main',
+                    padding: {
+                        xs: '0.5rem',
+                        lg: '0.3rem'
+                    },
+                }}>
+                <NavigationButton icon={<SearchIcon />} label={'Search'} isActive={currentPage === Menus.SEARCH} onClick={() => navigate("/")} />
+                <NavigationButton icon={<AddCircleOutlineIcon />} label={'Publish'} isActive={currentPage === Menus.PUBLISH} onClick={() => navigate("/publish")} />
+                <NavigationButton icon={<Logo style={{ opacity: '0.5' }} height={'3rem'} />} />
+                <NavigationButton icon={<Person2Icon />} label={'Messages'} isActive={currentPage === Menus.MESSAGES} />
+                <NavigationButton icon={<ForumIcon />} label={'Profile'} isActive={currentPage === Menus.PROFILE} />
 
-        </Container>
+            </Container>
+        </Container >
     );
 }

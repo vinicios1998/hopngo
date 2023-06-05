@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { CityInfo, TripSearchParams } from '../../types/types';
 import { fetchCities } from '../../service/service';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import SearchGoogleMaps from '../../components/googleMapsAutoComplete';
+import SeatIcon from '@mui/icons-material/EventSeat';
 
 export default function DestinationSearchCard() {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ export default function DestinationSearchCard() {
     const [cities, setCities] = useState<CityInfo[]>([]);
     const [fromLocation, setFromLocation] = useState<CityInfo | null>(null);
     const [toLocation, setToLocation] = useState<CityInfo | null>(null);
-    const [startDate, setStartDate] = useState<Dayjs | null>(null);
+    const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(Date.now()));
     const [seatCount, setSeatCount] = useState(1);
     const [isFilled, setIsFilled] = useState(false);
 
@@ -70,7 +71,6 @@ export default function DestinationSearchCard() {
                 alignContent: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '1rem',
                 padding: '1rem',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr 1fr 1fr',
@@ -97,12 +97,11 @@ export default function DestinationSearchCard() {
             <SearchGoogleMaps sx={{ gridArea: 'to' }} label="to" updateLocation={(newValue) => setToLocation(newValue)} />
             <DatePicker
                 onChange={(newValue) => handleChangeDate(newValue as Dayjs)}
-                slotProps={{ textField: { size: 'small' } }}
+                value={startDate}
                 sx={{ gridArea: 'date-picker' }}
-
             />
             <Select
-                size='small'
+                IconComponent={SeatIcon}
                 sx={{ gridArea: 'seat-select' }}
                 value={seatCount.toString()}
                 label="Seats"
@@ -125,7 +124,7 @@ export default function DestinationSearchCard() {
                 variant="contained"
                 disabled={!isFilled}
             >
-                Pesquisar
+                SEARCH
             </Button>
         </Container >
     );

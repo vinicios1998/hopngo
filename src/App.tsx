@@ -44,7 +44,7 @@ function App() {
               <Home />
             </ProtectedRoute>
           } />
-          <Route path="/publish/from/:from/to/:to/date/:date" element={
+          <Route path="/publish/from/:from/to/:to/date/:date/time/:time/seats/:seats" element={
             <ProtectedRoute>
               <ReviewPublish />
             </ProtectedRoute>

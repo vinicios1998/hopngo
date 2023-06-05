@@ -1,12 +1,13 @@
 import dayjs, { Dayjs } from 'dayjs';
 import cities from '../mock/cities.json'
-import users from '../mock/users.json'
-import rides from '../mock/rides.json'
-import { CityInfo, TripInfo, CityResult, NewUserDto, LoginDto } from '../types/types';
+import { CityInfo, TripInfo, CityResult, NewUserDto, LoginDto, NewTripDto, UserDto } from '../types/types';
 import axios from 'axios'
 
 const client = axios.create({
-    baseURL: process.env.API_PORT ?? "https://hopngoapi.azurewebsites.net/api/",
+    baseURL: "https://hopngoapi.azurewebsites.net/api/",
+    headers: {
+        'authorization': localStorage.getItem('token')
+    }
 });
 
 export const login = async (loginDto: LoginDto) => {
@@ -21,10 +22,10 @@ export const login = async (loginDto: LoginDto) => {
     }
 };
 
-export const getUser = async (loginDto: LoginDto) => {
+export const getUser = async (email: string) => {
     try {
-        if (!loginDto) return null
-        const response = await client.post(`/users/login`, loginDto);
+        if (!email) return null
+        const response = await client.get(`/users/email/${email}`);
         if (response.status !== 200) return null
         return response.data.token as string
     } catch (err) {
@@ -44,7 +45,6 @@ export const createNewUser = async (userDto: NewUserDto) => {
         return ({ sucess: false, message: "Error! Try again later" });
     }
 };
-
 
 const getRandomInteger = (min: number, max: number) => {
     min = Math.ceil(min);
@@ -84,8 +84,8 @@ export const getPlacesGoogleAutocomplete = async (inputValue: string) => {
 };
 export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayjs) => {
     try {
-        const response = await fetch(`trips/from/${from.place_id}/to/${to.place_id}/date/${date.format('DD-MM-YYYY')}`);
-        const data = await response.json() as TripInfo[]
+        const response = await client.get(`trips/from/${from.place_id}/to/${to.place_id}/date/${date.format('DD-MM-YYYY')}`);
+        const data = await response.data as TripInfo[]
         return data.map(x => ({
             ...x,
             date: dayjs(x.date, 'YYYY-MM-DD HH:mm:ss')
@@ -96,12 +96,10 @@ export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayj
     }
 };
 
-export const postTrip = async (tripInfo: TripInfo) => {
+export const postTrip = async (tripInfo: NewTripDto) => {
     try {
         const newItem = { ...tripInfo, date: tripInfo.date?.format('DD-MM-YYYY') }
-        const response = await client.post(`trips`, {
-            body: JSON.stringify(newItem), headers: { "Content-Type": "application/json", }
-        });
+        const response = await client.post(`trips`, newItem);
         await response.data()
     } catch (err) {
         console.log(err)
@@ -109,28 +107,19 @@ export const postTrip = async (tripInfo: TripInfo) => {
     }
 };
 
-export const getTrip = async (id: number, from: CityInfo, to: CityInfo) => {
+export const getTrip = async (id: string) => {
     try {
-        const tripMock = rides.find(x => x.id === id)
-        if (!tripMock) return null
-        const user = users.find(u => u.id === tripMock.user)
-        if (!user) return null
-        return {
-            id: tripMock.id,
-            user: user,
-            from: from,
-            fromLocation: tripMock.fromLocation,
-            to: to,
-            toLocation: tripMock.toLocation,
-            date: dayjs(tripMock.date, 'DD-MM-YYYY').add(getRandomInteger(0, 20), 'hour'),
-            price: tripMock.price,
-            duration: tripMock.duration
-        } as TripInfo
+        const response = await client.get(`trips/id/${id}`);
+        const data = await response.data as TripInfo
+        data.date = dayjs(data.date, 'DD-MM-YYYY')
+
+        return data
     } catch (err) {
         console.log(err)
         return null;
     }
 };
+
 export const fetchCitiesNames = async (text: string) => {
     try {
         if (!text) return []
@@ -155,5 +144,16 @@ export const fetchCities = async (text: string) => {
     } catch (err) {
         console.log(err)
         return [];
+    }
+};
+
+export const getUserMe = async () => {
+    try {
+        const response = await client.get(`users/me`);
+        const data = await response.data as UserDto
+        return data
+    } catch (err) {
+        console.log(err)
+        return null;
     }
 };

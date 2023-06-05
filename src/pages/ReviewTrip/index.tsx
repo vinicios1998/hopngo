@@ -12,7 +12,7 @@ export default function ReviewTrip() {
     const navigate = useNavigate()
     const { from, to, idTrip } = useParams()
 
-    const [trip, setTrip] = useState<TripInfo | null>();
+    const [trip, setTrip] = useState<TripInfo | null>(null);
 
     useEffect(() => {
         const getCities = async () => {
@@ -20,7 +20,7 @@ export default function ReviewTrip() {
             const fromInfo = await getCityInfo(from)
             const toInfo = await getCityInfo(to)
             if (fromInfo && toInfo && idTrip) {
-                const trip = await getTrip(parseInt(idTrip), fromInfo, toInfo)
+                const trip = await getTrip(idTrip)
                 setTrip(trip)
             }
 
@@ -28,30 +28,22 @@ export default function ReviewTrip() {
         getCities()
     }, [idTrip, from, to])
 
-    if (!idTrip || !from || !to || !trip) return null
+    if (!idTrip || !from || !to || !trip || !trip.date) return null
+
     const handleSelect = () => {
-        navigate(`/reserve/from/${trip.from.place_id}/to/${trip.to.place_id}/trip/${trip.id}/confirmation`)
+        navigate(`/`)
     }
+
+    if (!trip) return null
     return (
         <Container sx={{ padding: '0' }}>
-            <DateHeader date={trip.date} />
+            <DateHeader date={trip?.date} />
             <Box sx={{ height: '3rem' }} />
             <Box sx={{ display: 'flex', flexDirection: 'column', padding: '0.5rem 3rem 0.5rem 1rem' }}>
-                <Typography color={'primary.dark'} fontSize={'1.5rem'}>{trip.date.format('dddd')}, {trip.date.format('DD MMM')}</Typography>
+                {trip?.date && <Typography color={'primary.dark'} fontSize={'1.5rem'}>{trip?.date?.format('dddd')}, {trip?.date?.format('DD MMM')}</Typography>}
             </Box>
             <Container sx={{ padding: '1rem' }}>
                 <DestinationInfo tripInfo={trip} />
-            </Container>
-            <Container sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                backgroundColor: 'primary.light',
-                padding: '1rem'
-            }}>
-                <Typography>Preço total</Typography>
-                <Typography>{trip.price}€</Typography>
             </Container>
             <UserCard user={trip.user} />
             <Button
@@ -66,7 +58,7 @@ export default function ReviewTrip() {
                 fullWidth
                 size='large'
                 variant="contained">
-                Continue
+                Confirm
             </Button>
         </Container>
     );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import { SxProps, TextField, Theme } from '@mui/material';
 import { CityInfo, CityResult } from '../../types/types';
-import { getPlacesGoogleAutocomplete } from '../../service/service';
+import { getCityInfo, getPlacesGoogleAutocomplete } from '../../service/service';
 
 interface ICitySearchProps {
     label: string
@@ -17,29 +17,12 @@ const CitySearch = ({ label, sx, updateLocation }: ICitySearchProps) => {
     const handleCityChange = async (event: React.ChangeEvent<{}>, value: CityResult | null) => {
         setCity(value);
         if (!value) return
-        const coordenates = await searchCoordinates(value.place_id)
+        const coordenates = await getCityInfo(value.place_id)
         if (!coordenates) return
         updateLocation({ label: value.description, lat: coordenates.lat, lng: coordenates.lng, place_id: value.place_id })
     };
 
-    const searchCoordinates = async (placeId: string) => {
-        try {
-            const response = await fetch(
-                `http://localhost:3001/api/geocode?placeId=${placeId}`
-            );
-            const data = await response.json();
-            console.log(data)
-            if (data.results.length > 0) {
-                const { lat, lng } = data.results[0].geometry.location;
-                return ({ lat, lng });
-            } else {
-                return (null);
-            }
-        }
-        catch (e) {
-            return null
-        }
-    };
+
 
 
     const fetchData = async (description: string) => {

@@ -35,7 +35,7 @@ export default function DestinationInfo({ tripInfo }: INavigationCardProps) {
     return (
         <RowFlexContainer>
             <CardSegmentContainer >
-                <Typography>{tripInfo.date.format('HH:mm')}</Typography>
+                {tripInfo?.date && <Typography>{tripInfo.date.format('HH:mm')}</Typography>}
                 <Typography>{tripInfo.date.add(tripInfo.duration, 'minute').format('HH:mm')}</Typography>
             </CardSegmentContainer>
             <CardSegmentContainer sx={{ padding: '0.5rem 0' }}>

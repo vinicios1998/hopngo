@@ -19,7 +19,7 @@ export default function DateHeader({ date }: INaviagationListHeaderProps) {
             top: '0',
             left: 0,
             height: '3rem',
-            position: 'fixed'
+            position: 'absolute'
         }}>
             <IconButton onClick={() => { navigate(-1) }} >
                 <ArrowBackIosIcon />

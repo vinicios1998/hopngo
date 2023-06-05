@@ -43,10 +43,9 @@ const BottomCardContainer = styled(Box)({
 });
 export default function NavigationCard({ tripInfo }: INavigationCardProps) {
     const navigate = useNavigate()
-    console.log(tripInfo)
 
     const handleSelect = () => {
-        navigate(`/reserve/from/${tripInfo.from}/to/${tripInfo.to}/trip/${tripInfo.id}`)
+        navigate(`/reserve/from/${tripInfo.from.place_id}/to/${tripInfo.to.place_id}/trip/${tripInfo.id}`)
     }
     return (
 
@@ -74,9 +73,6 @@ export default function NavigationCard({ tripInfo }: INavigationCardProps) {
                             </DestinationContainer>
                         </CardSegmentContainer>
                     </RowFlexContainer>
-                    <CardSegmentContainer>
-                        <Typography fontWeight={'bold'}>{tripInfo.price}€</Typography>
-                    </CardSegmentContainer>
                 </RowFlexContainer>
                 <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row' }} >
                     <BottomCardContainer >

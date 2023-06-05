@@ -10,8 +10,10 @@ import { Menus } from '../../types/types';
 export default function Home() {
 
     return (
-        <Container sx={{ padding: '0' }}>
+        <Container sx={{ padding: '0' }} maxWidth={false} disableGutters>
             <Container
+                disableGutters
+                maxWidth={false}
                 sx={{
                     backgroundColor: 'primary.light',
                     display: 'flex',
@@ -20,7 +22,6 @@ export default function Home() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     padding: '1rem',
-                    borderRadius: '0 0 1rem 1rem'
                 }}
             >
                 <Logo style={{ opacity: '0.5' }} height={'2rem'} />
@@ -28,8 +29,19 @@ export default function Home() {
                 <DestinationSearchCard />
             </Container >
             <AppInfo />
+            <Container disableGutters maxWidth={false} sx={{
+                height: '0.5rem',
+                backgroundColor: 'primary.light',
+                padding: '0.5rem 0',
+                display: {
+                    xs: 'none',
+                    md: 'block',
+                }
+            }} />
+
+
             <SearchHistory />
-            <NavigationMenu currentPage={Menus.SEARCH}/>
+            <NavigationMenu currentPage={Menus.SEARCH} />
         </Container>
     );
 }
