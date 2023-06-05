@@ -2,7 +2,48 @@ import dayjs, { Dayjs } from 'dayjs';
 import cities from '../mock/cities.json'
 import users from '../mock/users.json'
 import rides from '../mock/rides.json'
-import { CityInfo, TripInfo } from '../types/types';
+import { CityInfo, TripInfo, CityResult, NewUserDto, LoginDto } from '../types/types';
+import axios from 'axios'
+
+const client = axios.create({
+    baseURL: process.env.API_PORT ?? "http://localhost:3001/api",
+});
+
+export const login = async (loginDto: LoginDto) => {
+    try {
+        if (!loginDto) return null
+        const response = await client.post(`/users/login`, loginDto);
+        if (response.status !== 200) return null
+        return response.data.token as string
+    } catch (err) {
+        console.log(err)
+        return null;
+    }
+};
+
+export const getUser = async (loginDto: LoginDto) => {
+    try {
+        if (!loginDto) return null
+        const response = await client.post(`/users/login`, loginDto);
+        if (response.status !== 200) return null
+        return response.data.token as string
+    } catch (err) {
+        console.log(err)
+        return null;
+    }
+};
+
+export const createNewUser = async (userDto: NewUserDto) => {
+    try {
+        const response = await client.post(`/users`, userDto);
+        if (response.status === 409) return ({ sucess: false, message: "User already exists!" })
+        if (response.status >= 400) return ({ sucess: false, message: "Error! Try again later" })
+        return { sucess: true, message: null }
+    } catch (err) {
+        console.log(err)
+        return ({ sucess: false, message: "Error! Try again later" });
+    }
+};
 
 
 const getRandomInteger = (min: number, max: number) => {
@@ -13,10 +54,8 @@ const getRandomInteger = (min: number, max: number) => {
 export const getCityInfo = async (text: string) => {
     try {
         if (!text) return null
-        const response = await fetch(
-            `http://localhost:3001/api/geocode?placeId=${text}`
-        );
-        const data = await response.json();
+        const response = await client.get(`/places/geocode?placeId=${text}`);
+        const data = await response.data;
         console.log(data)
         if (data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
@@ -34,11 +73,18 @@ export const getCityInfo = async (text: string) => {
         return null;
     }
 };
+export const getPlacesGoogleAutocomplete = async (inputValue: string) => {
+    try {
+        const response = await client.get(`/places/autocomplete?input=${inputValue}`);
+        return response.data as CityResult[];
+    }
+    catch (e) {
+        return []
+    }
+};
 export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayjs) => {
     try {
-        const response = await fetch(
-            `http://localhost:3001/api/trips/from/${from.place_id}/to/${to.place_id}/date/${date.format('DD-MM-YYYY')}`
-        );
+        const response = await fetch(`trips/from/${from.place_id}/to/${to.place_id}/date/${date.format('DD-MM-YYYY')}`);
         const data = await response.json() as TripInfo[]
         return data.map(x => ({
             ...x,
@@ -53,15 +99,10 @@ export const getAvailableTrips = async (from: CityInfo, to: CityInfo, date: Dayj
 export const postTrip = async (tripInfo: TripInfo) => {
     try {
         const newItem = { ...tripInfo, date: tripInfo.date?.format('DD-MM-YYYY') }
-        const response = await fetch(
-            `http://localhost:3001/api/trips`
-            , {
-                mode: 'cors',
-                method: 'POST', body: JSON.stringify(newItem), headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-        await response.json()
+        const response = await client.post(`trips`, {
+            body: JSON.stringify(newItem), headers: { "Content-Type": "application/json", }
+        });
+        await response.data()
     } catch (err) {
         console.log(err)
         return [];

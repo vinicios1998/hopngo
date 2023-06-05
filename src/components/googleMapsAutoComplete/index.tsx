@@ -1,20 +1,8 @@
 import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import { SxProps, TextField, Theme } from '@mui/material';
-import { CityInfo } from '../../types/types';
-
-interface CityResult {
-    description: string;
-    place_id: string;
-}
-
-
-export interface LocationInfo {
-    description: string;
-    place_id: string;
-    lat: number;
-    lng: number;
-}
+import { CityInfo, CityResult } from '../../types/types';
+import { getPlacesGoogleAutocomplete } from '../../service/service';
 
 interface ICitySearchProps {
     label: string
@@ -53,23 +41,11 @@ const CitySearch = ({ label, sx, updateLocation }: ICitySearchProps) => {
         }
     };
 
-    const fetchCitySuggestions = async (inputValue: string) => {
-        try {
-            const response = await fetch(
-                `http://localhost:3001/api/autocomplete?input=${inputValue}`
-            );
-            const data = await response.json();
-            return data as CityResult[];
-        }
-        catch (e) {
-            return []
-        }
-    };
 
     const fetchData = async (description: string) => {
         if (!description) return
         console.log('fetchData')
-        const values = await fetchCitySuggestions(description)
+        const values = await getPlacesGoogleAutocomplete(description)
         setCities(values)
     };
 

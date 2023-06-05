@@ -1,5 +1,16 @@
 import { Dayjs } from "dayjs";
 
+export interface NewUserDto {
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    bio: string;
+}
+export interface LoginDto {
+    email: string;
+    password: string;
+}
 export enum Menus {
     SEARCH,
     PUBLISH,
@@ -19,6 +30,7 @@ export interface User {
     surname: string;
     rate: number;
     bio: string;
+    email: string;
 }
 
 export interface TripSearchParams {
@@ -39,4 +51,16 @@ export interface TripInfo {
     date: Dayjs
     duration: number
     price: number
+}
+
+export interface CityResult {
+    description: string;
+    place_id: string;
+}
+
+export interface LocationInfo {
+    description: string;
+    place_id: string;
+    lat: number;
+    lng: number;
 }
