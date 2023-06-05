@@ -6,7 +6,7 @@ import { CityInfo, TripInfo, CityResult, NewUserDto, LoginDto } from '../types/t
 import axios from 'axios'
 
 const client = axios.create({
-    baseURL: process.env.API_PORT ?? "http://hopngoapi.azurewebsites.net/api/",
+    baseURL: process.env.API_PORT ?? "https://hopngoapi.azurewebsites.net/api/",
 });
 
 export const login = async (loginDto: LoginDto) => {

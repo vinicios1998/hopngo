@@ -12,6 +12,7 @@ import ReviewPublish from './pages/ReviewPublish';
 import { useState } from 'react';
 import LoginScreen from './features/Auth/LoginScreen';
 import RegisterUserScreen from './features/Auth/RegisterUserScreen';
+import { CssBaseline } from '@mui/material';
 
 function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
@@ -31,7 +32,7 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <BrowserRouter>
-
+        <CssBaseline />
         <Routes>
           <Route path="/" element={<ProtectedRoute>
             <Home />
