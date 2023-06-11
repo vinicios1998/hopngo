@@ -1,22 +1,25 @@
-AS-Projeto 22/23
-Hop N´ Go
-Ferramenta de gestão de grupo - Jira 📘
+# AS-Projeto 22/23
 
-Protótipo exploratório - Figma ✏️
+## Hop N'Go
 
-Webapp de boleias.
+**Protótipo** - [Figma](https://www.figma.com/file/Vqyq9sPjwunf1zlsNy1MlB/TP---AS--Final?type=design&node-id=0-1)
 
-Hop N´ Go Home page
+---
 
-Controlo de versões: GitHub repository 📁
+### Webapp de transporte privado urbano.
 
-Hop N' Go website ☕
+**Versões:** [GitHub repository](https://github.com/vinicios1998/hopngo)
 
-Membros Grupo 3, P1
-Pedro Torres - 108799
+[Hop N'Go](https://gentle-sand-0a7006d10.3.azurestaticapps.net/)
 
-Vasco Rodrigues - 109211
+---
 
-Júlia Abrantes - 104170
+# Membros Grupo 3, P1 
 
-Vinicios Oliveira - 106109
+**Pedro Torres** - 108799
+
+**Vasco Rodrigues** - 109211
+
+**Júlia Abrantes** - 104170
+
+**Vinicios Oliveira** - 106109
